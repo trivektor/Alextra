@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title_for_layout %> - Alexis</title>
+  <link href="/stylesheets/master.css?1300891871" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body id="<%= @body_id %>">
+  
+<%#= render :partial => 'shared/alert' %>
+
+<%#= render :partial => 'shared/taskbar' %>
+
+<div id="stage">
+  <%= yield %>
+</div>
+
+<div id="overlay"></div>
+
+</body>
+</html>

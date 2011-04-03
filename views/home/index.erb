@@ -1,0 +1,23 @@
+<%
+@title_for_layout = 'Home'
+@body_id = 'home'
+%>
+
+<div class="session_form">
+  
+  <a href="/">
+    <img src="/images/alexisRibbon.png" id="signup_ribbon" alt="Alexis" />
+  </a>
+  
+  <div style="text-align:center; margin:20px 0">
+    <img src="/images/introText.png" alt="Alexis helps you create beautiful online business cards that don't suck, for free. Seriously" />
+  </div>
+  
+  <div style="text-align:center">
+    <form action="https://alextra.rpxnow.com/openid/start?token_url=http://localhost:9292/login" method="POST">
+      <input type="hidden" name="openid_identifier" value="https://www.google.com/accounts/o8/id" />
+      <input type="image" src="/images/google.png" />
+    </form>
+  </div>
+  
+</div>

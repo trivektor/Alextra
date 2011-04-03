@@ -1,0 +1,43 @@
+GIT
+  remote: git://github.com/emk/sinatra-url-for.git
+  revision: a19bac86311029a2bb6c7df940cc905686adc9cd
+  specs:
+    sinatra-url-for (0.2.1)
+      sinatra (>= 0.9.1.1)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    addressable (2.2.4)
+    dm-aggregates (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-core (1.1.0)
+      addressable (~> 2.2.4)
+    dm-timestamps (1.1.0)
+      dm-core (~> 1.1.0)
+    emk-sinatra-url-for (0.2.1)
+      sinatra (>= 0.9.1.1)
+    haml (3.0.25)
+    mysql2 (0.2.6)
+    rack (1.2.2)
+    sinatra (1.2.1)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
+    sinatra-static-assets (0.5.0)
+      emk-sinatra-url-for (>= 0.2.1)
+      rack (>= 1.0.0)
+      sinatra (>= 0.9.1)
+    tilt (1.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dm-aggregates
+  dm-core
+  dm-timestamps
+  haml
+  mysql2
+  sinatra
+  sinatra-static-assets
+  sinatra-url-for!
