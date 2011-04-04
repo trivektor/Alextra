@@ -1,0 +1,13 @@
+<div id="taskbar">
+  <img src="/images/alexis.png" alt="Alexis" />
+  <div id="taskbar_nav">
+    <img class="user_image" id="taskbar_user_image" src="<%= current_user.photo_url %>" alt="<%= current_user.username %>" />
+    <ul id="global_top_nav">
+      <li>Logged in as <%= current_user.username %></li>
+      <li><a href="/dashboard">My cards</a></li>
+      <li class="last"><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  <div class="clearfloat"></div>
+</div>
+<div id="taskbar_divider"></div>

@@ -2,3 +2,44 @@
 @title_for_layout = 'Dashboard'
 @body_id = 'dashboard'
 %>
+
+<h1 class="header">My cards</h1>
+
+
+
+<div id="mycards" class="vanilla_region">
+  
+  <div class="white_region">
+    <div class="beige_region">
+  
+      <% if @business_cards.count > 0 %>
+    
+    
+            <ul id="mycards_list" class="item_list">
+              <% @business_cards.each do |business_card| %>
+                <li class="clearfix">
+                  <div class="left">
+                    <a class="card_name tooltip" href="/<%= business_card.url %>" title="View this card (in a new tab)"><%= business_card.title %></a>
+                    <div class="card_last_updated">Last updated on <%= convert_timestamp_to_date business_card.updated_at  %></div>
+                  </div>
+                  <div class="options">
+                    <a class="delete action_link tooltip" href="/business_cards/<%= business_card.id %>/delete" title="Delete"></a>
+                    <a target="_blank" href="/<%= business_card.url %>" class="viewlive action_link tooltip" title="View this card"><%= business_card.url %></a>
+                    <%#= link_to 'Edit', edit_business_card_path(business_card), :class => 'edit action_link tooltip', :title => 'Edit this card' %>
+                    <%#= link_to 'Analytics', stats_business_card_path(business_card), :class => 'analytic action_link', :title => 'View stats' %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+        
+            <%#= link_to 'Create new card', new_business_card_path, :class => 'red_btn' %>
+        
+      <% else %>
+        <p style="margin-bottom:10px">You have yet created any cards. </p> 
+        <a class="red_btn" href="/business_cards/new">Create new card</a>
+      <% end %>
+  
+    </div>
+  </div>
+  
+</div>

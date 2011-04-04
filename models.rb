@@ -1,6 +1,7 @@
 require 'dm-core'
 require 'dm-timestamps'
 require 'dm-aggregates'
+require 'dm-validations'
 require 'open-uri'
 
 DataMapper.setup(:default, 'mysql://root:root@127.0.0.1:8889/alextra')
@@ -29,9 +30,18 @@ class BusinessCard
   
   include DataMapper::Resource
   
-  property :id, Serial
+  property :id,         Serial
+  property :user_id,    Integer
+  property :url,        String, :length => 255
+  property :title,      String, :length => 255
+  property :card_type,  String, :length => 255
+  property :status,     String, :length => 50
   property :created_at, DateTime
+  property :updated_at, DateTime
+  
   belongs_to :user
+  
+  validates_presence_of :title
   
 end
 

@@ -5,16 +5,8 @@
   <link href="/stylesheets/master.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
 <body id="<%= @body_id %>">
-  
-<%#= render :partial => 'shared/alert' %>
 
-<%= erb :'shared/taskbar', :layout => false %>
-
-<div id="stage">
-  <%= yield %>
-</div>
-
-<div id="overlay"></div>
+<%= yield %>
 
 </body>
 </html>

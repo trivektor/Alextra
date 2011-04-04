@@ -4,12 +4,13 @@ require 'net/https'
 require 'digest/md5'
 require 'models'
 require 'sinatra/session'
+require 'helpers/user_helper'
 
-set :sessions, true
+enable :sessions
 set :session_secret, 'So0perSeKr3t!'
 
 get '/' do
-  erb :'home/index', {:layout => :'layout/application'}
+  erb :'home/index', {:layout => :'layout/signup'}
 end
 
 post '/dashboard' do
@@ -42,6 +43,7 @@ post '/login' do
   end
   
   session[:userid] = user.id
+  session[:current_user] = user
   
   redirect "/#{user.email}"
 end
@@ -52,7 +54,20 @@ end
 get "/:email" do
   @myself = User.get(session[:userid])
   @user = @myself.email == params[:email] ? @myself : User.first(:email => params[:email])
+  @business_cards = @user.business_cards
   erb :'dashboard/index', {:layout => :'layout/application'}
+end
+
+get "/business_cards/new" do
+  if !logged_in? 
+    redirect "/" and return
+  end
+  @business_card = BusinessCard.new
+  erb :'business_cards/new', {:layout => :'layout/application'}
+end
+
+post "/business_cards" do
+  redirect "/business_cards/new"
 end
 
 def get_user(token)
