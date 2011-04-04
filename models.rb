@@ -41,7 +41,9 @@ class BusinessCard
   
   belongs_to :user
   
-  validates_presence_of :title
+  validates_presence_of :title, :message => 'Title is required'
+  validates_presence_of :url, :message => 'Url is required'
+  validates_uniqueness_of :url, :message => 'This url is not available'
   
 end
 

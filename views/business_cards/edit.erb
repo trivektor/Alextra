@@ -1,0 +1,12 @@
+<%
+@title_for_layout = 'Edit Business Card'
+@body_id = 'edit_business_card'
+%>
+
+<h1 style="float:left"><%= @title_for_layout %></h1>
+
+<div class="options" style="float:right; text-align:right">
+  <a id="select_background" class="open_gallery">Choose a background</a> | <a id="select_theme" class="open_gallery">Select a theme</a> | <a id="preview_card" href="/<%= @business_card.url %>" target="_blank">View card</a>
+</div>
+
+<div class="clearfloat"></div>

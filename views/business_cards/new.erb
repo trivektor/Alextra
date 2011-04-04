@@ -5,22 +5,34 @@
 
 <h1><%= @title_for_layout %></h1>
 
+<% if !flash[:error_notice].blank? %>
+<div class="result_error">
+  <%= flash[:error_notice] %>
+</div>
+<% end %>
+
 <form method="post" action="/business_cards">
-  
-  <%# if @business_card.errors.count > 0 %>
-    <%#= render :partial => 'shared/form_errors', :locals => {:f => business_card_form} %>
-  <%# end %>
+  <% errors = flash[:errors] %>
+  <% if !errors.blank? && errors.count > 0 %>
+    <div class="result_error">
+      <ul>
+        <% errors.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   
   <div id="business_card_form" class="vanilla_region">  
     <div class="white_region">
       <div class="beige_region">
         <div class="form_row">
           <label>Choose a url for your card</label>
-          <input type="text" class="textbox" name="business_card[url]" />
+          <input type="text" class="textbox" name="business_card[url]" value="<%#= flash[:form_values][:url] %>" />
         </div>
         <div class="form_row" style="margin-bottom:10px">
           <label>Pick a title for your card</label>
-          <input type="text" class="textbox" name="business_card[title]" />
+          <input type="text" class="textbox" name="business_card[title]" value="<%#= flash[:form_values][:title] %>" />
         </div>
         <input type="submit" value="Create" name="commit" id="business_card_submit" class="red_btn" />
       </div>

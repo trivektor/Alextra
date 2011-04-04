@@ -5,7 +5,9 @@
 
 <h1 class="header">My cards</h1>
 
-
+<% if !flash[:success_notice].blank? %>
+  <div class="result_success"><%= flash[:success_notice] %></div>
+<% end %>
 
 <div id="mycards" class="vanilla_region">
   
@@ -25,14 +27,14 @@
                   <div class="options">
                     <a class="delete action_link tooltip" href="/business_cards/<%= business_card.id %>/delete" title="Delete"></a>
                     <a target="_blank" href="/<%= business_card.url %>" class="viewlive action_link tooltip" title="View this card"><%= business_card.url %></a>
-                    <%#= link_to 'Edit', edit_business_card_path(business_card), :class => 'edit action_link tooltip', :title => 'Edit this card' %>
+                    <a href="/business_cards/<%= business_card.id %>/edit" class="edit action_link" title="Edit this card">Edit</a>
                     <%#= link_to 'Analytics', stats_business_card_path(business_card), :class => 'analytic action_link', :title => 'View stats' %>
                   </div>
                 </li>
               <% end %>
             </ul>
         
-            <%#= link_to 'Create new card', new_business_card_path, :class => 'red_btn' %>
+            <a href="/business_cards/new" class="red_btn">Create new card</a>
         
       <% else %>
         <p style="margin-bottom:10px">You have yet created any cards. </p> 

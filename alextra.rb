@@ -5,6 +5,7 @@ require 'digest/md5'
 require 'models'
 require 'sinatra/session'
 require 'helpers/user_helper'
+require 'helpers/business_card_helper'
 
 enable :sessions
 set :session_secret, 'So0perSeKr3t!'
@@ -25,7 +26,10 @@ get '/dashboard' do
   if session[:userid].nil?
     redirect '/'
   else
-    redirect "/#{User.get(session[:userid]).email}"
+    #@myself = User.get(session[:userid])
+    @user = User.first(:email => current_user.email)
+    @business_cards = @user.business_cards
+    erb :'dashboard/index', {:layout => :'layout/application'}
   end
 end
 
@@ -45,17 +49,14 @@ post '/login' do
   session[:userid] = user.id
   session[:current_user] = user
   
-  redirect "/#{user.email}"
+  redirect "/dashboard"
 end
 
 get '/logout' do
 end
 
-get "/:email" do
-  @myself = User.get(session[:userid])
-  @user = @myself.email == params[:email] ? @myself : User.first(:email => params[:email])
-  @business_cards = @user.business_cards
-  erb :'dashboard/index', {:layout => :'layout/application'}
+get "/:business_card_url" do
+  
 end
 
 get "/business_cards/new" do
@@ -67,7 +68,27 @@ get "/business_cards/new" do
 end
 
 post "/business_cards" do
-  redirect "/business_cards/new"
+  
+  business_card = BusinessCard.new(:url => params[:business_card][:url], :title => params[:business_card][:title], :user_id => current_user.id)
+  
+  if business_card.save
+    flash[:success_notice] = "Your card has been created"
+    redirect '/dashboard'
+  else
+    flash[:error_notice] = "Your business card cannot be created due to the following errors"
+    errors = []
+    business_card.errors.each do |e|
+      errors << e
+    end
+    flash[:errors] = errors
+    #flash[:form_values] = params[:business_card]
+    redirect '/business_cards/new'
+  end
+  
+end
+
+get "business_cards/[0-9]+/edit" do
+  erb :'business_cards/edit', {:layout => :'layout/application'}
 end
 
 def get_user(token)
